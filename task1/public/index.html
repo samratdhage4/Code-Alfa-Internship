@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="AlphaStore - Modern, responsive e-commerce web application with product listings, shopping cart, user auth, and order processing.">
+  <title>AlphaStore | Modern E-Commerce</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Top Announcement Bar -->
+  <aside class="announcement-bar" aria-label="Special offer">
+    <p>⚡ <strong>Flash Deal:</strong> Free express shipping on orders over $50! Use code <strong>ALPHA2026</strong></p>
+  </aside>
+
+  <!-- Main Navigation Header -->
+  <header class="navbar" id="mainHeader">
+    <div class="nav-container">
+      <div class="nav-left">
+        <a href="#" class="brand-logo" id="homeLogo">
+          <span class="logo-icon">🛍️</span>
+          <span class="brand-name">Alpha<span>Store</span></span>
+        </a>
+      </div>
+
+      <!-- Search Bar -->
+      <div class="search-container">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="searchInput" placeholder="Search gadgets, fashion, home essentials..." autocomplete="off">
+        <button id="clearSearchBtn" class="clear-btn" title="Clear search" style="display:none;">✕</button>
+      </div>
+
+      <!-- Nav Actions -->
+      <div class="nav-right">
+        <!-- User Profile / Auth Button -->
+        <div class="user-menu-wrapper" id="userMenuWrapper">
+          <button class="nav-btn auth-btn" id="authBtn">
+            <span class="btn-icon">👤</span>
+            <span class="btn-label" id="authBtnLabel">Sign In</span>
+          </button>
+          <div class="user-dropdown" id="userDropdown" style="display: none;">
+            <div class="user-dropdown-header">
+              <p class="user-name" id="dropdownUserName">User Name</p>
+              <p class="user-email" id="dropdownUserEmail">user@example.com</p>
+            </div>
+            <button class="dropdown-item" id="openOrdersBtn">📦 My Orders</button>
+            <hr class="dropdown-divider">
+            <button class="dropdown-item text-danger" id="logoutBtn">🚪 Sign Out</button>
+          </div>
+        </div>
+
+        <!-- Orders Button (Direct access) -->
+        <button class="nav-btn icon-only-btn" id="directOrdersBtn" title="View Orders">
+          <span class="btn-icon">📦</span>
+          <span class="nav-tooltip">Orders</span>
+        </button>
+
+        <!-- Cart Button -->
+        <button class="nav-btn cart-btn" id="cartBtn" title="Shopping Cart">
+          <span class="btn-icon">🛒</span>
+          <span class="cart-label">Cart</span>
+          <span class="cart-badge" id="cartBadge">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Banner -->
+  <section class="hero-section">
+    <div class="hero-content">
+      <span class="hero-pill">✨ Spring 2026 Collection</span>
+      <h1 class="hero-title">Discover Curated Tech & Lifestyle Essentials</h1>
+      <p class="hero-subtitle">Premium gadgets, fashion wear, and artisan goods engineered for high performance and everyday comfort.</p>
+      <div class="hero-actions">
+        <a href="#catalogSection" class="btn btn-primary">Shop Now</a>
+        <button class="btn btn-secondary" id="heroLearnMoreBtn">Explore Features</button>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-card">
+        <h3>100%</h3>
+        <p>Verified Quality</p>
+      </div>
+      <div class="stat-card">
+        <h3>24/7</h3>
+        <p>Fast Dispatch</p>
+      </div>
+      <div class="stat-card">
+        <h3>4.9★</h3>
+        <p>Customer Rating</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Catalog Section -->
+  <main class="main-content" id="catalogSection">
+    <div class="catalog-header">
+      <div class="catalog-filters">
+        <div class="category-chips" id="categoryChips">
+          <button class="chip-btn active" data-category="All">All Items</button>
+          <button class="chip-btn" data-category="Electronics">Electronics</button>
+          <button class="chip-btn" data-category="Fashion">Fashion</button>
+          <button class="chip-btn" data-category="Home & Kitchen">Home & Kitchen</button>
+        </div>
+      </div>
+
+      <div class="catalog-sorting">
+        <label for="sortSelect">Sort by:</label>
+        <select id="sortSelect" class="sort-dropdown">
+          <option value="default">Featured</option>
+          <option value="price-asc">Price: Low to High</option>
+          <option value="price-desc">Price: High to Low</option>
+          <option value="rating">Highest Rated</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Active filter alert tag -->
+    <div class="active-filter-bar" id="activeFilterBar" style="display: none;">
+      <span id="activeFilterText">Filtered by: </span>
+      <button id="resetFiltersBtn" class="reset-filter-link">Clear Filter</button>
+    </div>
+
+    <!-- Products Grid -->
+    <section class="products-grid" id="productsGrid" aria-label="Product listings">
+      <!-- Injected via JavaScript -->
+    </section>
+
+    <!-- Empty State for Search -->
+    <div class="empty-state" id="noProductsFound" style="display: none;">
+      <div class="empty-icon">🔎</div>
+      <h3>No matching products found</h3>
+      <p>Try searching with another keyword or explore all categories.</p>
+      <button class="btn btn-primary" id="viewAllProductsBtn">View All Products</button>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="main-footer">
+    <div class="footer-container">
+      <div class="footer-col">
+        <div class="brand-logo footer-logo">
+          <span class="logo-icon">🛍️</span>
+          <span class="brand-name">Alpha<span>Store</span></span>
+        </div>
+        <p class="footer-desc">A full-stack e-commerce project built for the CodeAlpha Web Development Internship program.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Technology Stack</h4>
+        <ul>
+          <li>Node.js & Express.js</li>
+          <li>Built-in SQLite Database</li>
+          <li>Modern CSS & Flex/Grid</li>
+          <li>Vanilla JavaScript ES6+</li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Demo Features</h4>
+        <ul>
+          <li>Interactive Shopping Cart</li>
+          <li>Dynamic Catalog & Search</li>
+          <li>JWT User Authentication</li>
+          <li>Checkout & Order Logs</li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Access</h4>
+        <p>Use pre-configured demo account:</p>
+        <p class="demo-badge">demo@codealpha.com / password123</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 AlphaStore • CodeAlpha Full Stack Internship Task 1</p>
+    </div>
+  </footer>
+
+  <!-- ==================== MODALS & DRAWERS ==================== -->
+
+  <!-- Cart Slide-in Drawer -->
+  <div class="drawer-overlay" id="cartOverlay">
+    <aside class="cart-drawer" id="cartDrawer" role="dialog" aria-label="Shopping Cart">
+      <div class="drawer-header">
+        <div class="drawer-title">
+          <h3>Your Shopping Cart</h3>
+          <span class="drawer-badge" id="cartItemsCountText">0 items</span>
+        </div>
+        <button class="close-btn" id="closeCartBtn" title="Close cart">✕</button>
+      </div>
+
+      <div class="cart-items-list" id="cartItemsList">
+        <!-- Rendered dynamically -->
+      </div>
+
+      <div class="cart-footer" id="cartFooter">
+        <div class="cart-summary-line">
+          <span>Subtotal</span>
+          <span class="summary-val" id="cartSubtotal">$0.00</span>
+        </div>
+        <div class="cart-summary-line">
+          <span>Shipping</span>
+          <span class="summary-val text-success" id="cartShipping">FREE</span>
+        </div>
+        <div class="cart-summary-line total-line">
+          <span>Total</span>
+          <span class="summary-val" id="cartTotal">$0.00</span>
+        </div>
+        <button class="btn btn-primary btn-block" id="proceedToCheckoutBtn">Proceed to Checkout</button>
+      </div>
+    </aside>
+  </div>
+
+  <!-- Product Details Modal -->
+  <div class="modal-overlay" id="productModalOverlay">
+    <div class="modal-container product-modal" role="dialog" aria-label="Product details">
+      <button class="close-btn modal-close" id="closeProductModalBtn">✕</button>
+      <div class="product-modal-body" id="productModalContent">
+        <!-- Rendered dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Checkout Modal -->
+  <div class="modal-overlay" id="checkoutModalOverlay">
+    <div class="modal-container checkout-modal" role="dialog" aria-label="Checkout">
+      <button class="close-btn modal-close" id="closeCheckoutModalBtn">✕</button>
+      <div class="checkout-header">
+        <h2>Complete Your Order</h2>
+        <p>Review items and enter delivery details to place your order.</p>
+      </div>
+
+      <form id="checkoutForm" class="checkout-form">
+        <div class="checkout-grid">
+          <!-- Left: Shipping Information -->
+          <div class="checkout-section">
+            <h3>📍 Shipping Address</h3>
+            <div class="form-group">
+              <label for="checkoutName">Full Name *</label>
+              <input type="text" id="checkoutName" required placeholder="John Doe">
+            </div>
+            <div class="form-group">
+              <label for="checkoutEmail">Email Address *</label>
+              <input type="email" id="checkoutEmail" required placeholder="john@example.com">
+            </div>
+            <div class="form-group">
+              <label for="checkoutAddress">Street Address *</label>
+              <input type="text" id="checkoutAddress" required placeholder="123 Innovation Way, Apt 4B">
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="checkoutCity">City *</label>
+                <input type="text" id="checkoutCity" required placeholder="San Francisco">
+              </div>
+              <div class="form-group">
+                <label for="checkoutZip">Postal Code *</label>
+                <input type="text" id="checkoutZip" required placeholder="94103">
+              </div>
+            </div>
+
+            <h3 style="margin-top: 1.5rem;">💳 Payment Simulation</h3>
+            <div class="payment-options">
+              <label class="payment-radio">
+                <input type="radio" name="paymentMethod" value="card" checked>
+                <span>Credit / Debit Card (Simulated)</span>
+              </label>
+              <label class="payment-radio">
+                <input type="radio" name="paymentMethod" value="cod">
+                <span>Cash on Delivery</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Right: Order Summary -->
+          <div class="checkout-section order-review-box">
+            <h3>🧾 Order Summary</h3>
+            <div class="order-items-preview" id="checkoutItemsPreview">
+              <!-- Rendered items -->
+            </div>
+            <div class="checkout-totals">
+              <div class="summary-line">
+                <span>Subtotal</span>
+                <span id="checkoutSubtotal">$0.00</span>
+              </div>
+              <div class="summary-line">
+                <span>Express Shipping</span>
+                <span class="text-success">FREE</span>
+              </div>
+              <div class="summary-line total">
+                <span>Total Due</span>
+                <span id="checkoutTotal">$0.00</span>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block" id="placeOrderBtn">
+              Confirm & Place Order
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Order Success Modal -->
+  <div class="modal-overlay" id="orderSuccessOverlay">
+    <div class="modal-container success-modal" role="dialog" aria-label="Order confirmation">
+      <div class="success-content">
+        <div class="success-icon">🎉</div>
+        <h2>Order Confirmed!</h2>
+        <p class="success-subtitle">Thank you for your purchase. We have received your order.</p>
+        <div class="order-info-card">
+          <div class="info-row">
+            <span>Order Reference:</span>
+            <strong id="successOrderId">#ORD-0000</strong>
+          </div>
+          <div class="info-row">
+            <span>Status:</span>
+            <span class="badge badge-success" id="successOrderStatus">Confirmed</span>
+          </div>
+          <div class="info-row">
+            <span>Total Paid:</span>
+            <strong id="successOrderTotal">$0.00</strong>
+          </div>
+          <div class="info-row">
+            <span>Deliver To:</span>
+            <span id="successOrderAddress">123 Street</span>
+          </div>
+        </div>
+        <div class="success-actions">
+          <button class="btn btn-primary" id="viewMyOrdersAfterSuccessBtn">View Order in History</button>
+          <button class="btn btn-secondary" id="continueShoppingBtn">Continue Shopping</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- User Authentication Modal (Login / Register) -->
+  <div class="modal-overlay" id="authModalOverlay">
+    <div class="modal-container auth-modal" role="dialog" aria-label="Account Login or Registration">
+      <button class="close-btn modal-close" id="closeAuthModalBtn">✕</button>
+
+      <div class="auth-tabs">
+        <button class="auth-tab-btn active" id="tabLoginBtn">Sign In</button>
+        <button class="auth-tab-btn" id="tabRegisterBtn">Create Account</button>
+      </div>
+
+      <!-- Quick Demo Login Button -->
+      <div class="demo-auth-box">
+        <button type="button" class="btn btn-outline btn-block" id="fillDemoCredsBtn">
+          ⚡ One-Click Fill Demo Credentials
+        </button>
+      </div>
+
+      <!-- Login Form -->
+      <form id="loginForm" class="auth-form">
+        <div class="form-group">
+          <label for="loginEmail">Email Address</label>
+          <input type="email" id="loginEmail" required placeholder="demo@codealpha.com">
+        </div>
+        <div class="form-group">
+          <label for="loginPassword">Password</label>
+          <input type="password" id="loginPassword" required placeholder="••••••••">
+        </div>
+        <button type="submit" class="btn btn-primary btn-block" id="loginSubmitBtn">Sign In to AlphaStore</button>
+      </form>
+
+      <!-- Register Form -->
+      <form id="registerForm" class="auth-form" style="display: none;">
+        <div class="form-group">
+          <label for="regName">Your Full Name</label>
+          <input type="text" id="regName" required placeholder="Alex Morgan">
+        </div>
+        <div class="form-group">
+          <label for="regEmail">Email Address</label>
+          <input type="email" id="regEmail" required placeholder="alex@example.com">
+        </div>
+        <div class="form-group">
+          <label for="regPassword">Password (6+ characters)</label>
+          <input type="password" id="regPassword" required minlength="6" placeholder="Choose a secure password">
+        </div>
+        <button type="submit" class="btn btn-primary btn-block" id="registerSubmitBtn">Create My Account</button>
+      </form>
+
+      <div class="auth-error-msg" id="authErrorMsg" style="display: none;"></div>
+    </div>
+  </div>
+
+  <!-- Orders History Modal -->
+  <div class="modal-overlay" id="ordersModalOverlay">
+    <div class="modal-container orders-modal" role="dialog" aria-label="Orders History">
+      <button class="close-btn modal-close" id="closeOrdersModalBtn">✕</button>
+      <div class="orders-header">
+        <h2>📦 Order History</h2>
+        <p>Review past purchases, quantities, and delivery status.</p>
+      </div>
+      <div class="orders-list" id="ordersListContainer">
+        <!-- Rendered dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toastContainer" aria-live="polite"></div>
+
+  <!-- JavaScript Application -->
+  <script src="js/app.js"></script>
+</body>
+</html>

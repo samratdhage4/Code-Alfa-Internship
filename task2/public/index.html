@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pulse - Mini Social Media Platform</title>
+  <meta name="description" content="A simple and modern social media platform with user profiles, posts, comments, likes, and followers.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Top App Bar -->
+  <header class="top-nav">
+    <div class="nav-container">
+      <div class="brand-logo" id="logoBtn">
+        <div class="logo-icon">⚡</div>
+        <span class="logo-text">Pulse</span>
+      </div>
+
+      <!-- Quick User Switcher for Easy Demonstration -->
+      <div class="demo-switcher">
+        <span class="switcher-label">Demo As:</span>
+        <div class="switcher-buttons" id="quickSwitcher">
+          <button type="button" class="btn-chip" data-user="alice">Alice</button>
+          <button type="button" class="btn-chip" data-user="bob">Bob</button>
+          <button type="button" class="btn-chip" data-user="charlie">Charlie</button>
+        </div>
+      </div>
+
+      <div class="nav-auth-actions" id="navAuthArea">
+        <!-- Injected via JavaScript (user info or login/register buttons) -->
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Application Layout -->
+  <div class="app-layout">
+    <!-- Left Navigation Sidebar -->
+    <aside class="left-sidebar">
+      <nav class="side-nav">
+        <button class="nav-item active" id="navFeedBtn">
+          <span class="icon">🏠</span>
+          <span class="label">Home Feed</span>
+        </button>
+        <button class="nav-item" id="navExploreBtn">
+          <span class="icon">🔍</span>
+          <span class="label">Explore People</span>
+        </button>
+        <button class="nav-item" id="navProfileBtn">
+          <span class="icon">👤</span>
+          <span class="label">My Profile</span>
+        </button>
+      </nav>
+
+      <!-- Mini Current User Card -->
+      <div class="current-user-mini" id="sidebarUserCard">
+        <!-- Injected via JS -->
+      </div>
+    </aside>
+
+    <!-- Center Content Column -->
+    <main class="main-content">
+      <!-- Section: Home Feed -->
+      <section id="feedSection" class="view-section active">
+        <!-- Post Creator Box -->
+        <div class="card create-post-card" id="createPostContainer">
+          <div class="create-post-header">
+            <img id="createPostAvatar" class="avatar avatar-md" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150" alt="Avatar">
+            <div class="create-post-input-wrapper">
+              <textarea id="postContentInput" placeholder="What's happening in your tech world today?" rows="3"></textarea>
+            </div>
+          </div>
+
+          <div class="post-media-field" id="postImageField" style="display: none;">
+            <input type="url" id="postImageUrlInput" placeholder="Paste image URL (e.g. https://images.unsplash.com/...)">
+            <div id="imagePreviewContainer" class="image-preview" style="display: none;">
+              <img id="imagePreview" src="" alt="Preview">
+              <button type="button" id="removeImageBtn" class="btn-remove-media">✕</button>
+            </div>
+          </div>
+
+          <div class="create-post-footer">
+            <div class="post-actions-left">
+              <button type="button" class="btn-action-icon" id="toggleImageBtn" title="Attach Image URL">
+                <span>📷 Add Image</span>
+              </button>
+            </div>
+            <button type="button" class="btn btn-primary" id="submitPostBtn">
+              Publish Post
+            </button>
+          </div>
+        </div>
+
+        <!-- Feed Filter Bar -->
+        <div class="feed-tabs">
+          <button class="tab-btn active" data-filter="all">All Posts</button>
+          <button class="tab-btn" data-filter="my">My Posts</button>
+        </div>
+
+        <!-- Posts List -->
+        <div class="posts-stream" id="postsContainer">
+          <!-- Dynamically populated via JS -->
+          <div class="loading-spinner">Loading posts...</div>
+        </div>
+      </section>
+
+      <!-- Section: Explore People -->
+      <section id="exploreSection" class="view-section">
+        <div class="section-heading">
+          <h2>Discover People</h2>
+          <p>Connect with other builders, developers, and designers on Pulse.</p>
+        </div>
+        <div class="explore-grid" id="exploreContainer">
+          <!-- Users injected via JS -->
+        </div>
+      </section>
+
+      <!-- Section: User Profile View -->
+      <section id="profileSection" class="view-section">
+        <div class="card profile-header-card" id="profileHeaderCard">
+          <!-- Profile details injected via JS -->
+        </div>
+
+        <div class="profile-posts-header">
+          <h3 id="profilePostsTitle">Posts</h3>
+        </div>
+
+        <div class="posts-stream" id="profilePostsContainer">
+          <!-- Profile posts injected via JS -->
+        </div>
+      </section>
+    </main>
+
+    <!-- Right Sidebar (Who to Follow & Quick Stats) -->
+    <aside class="right-sidebar">
+      <div class="card sidebar-widget">
+        <div class="widget-header">
+          <h3>Suggested for you</h3>
+        </div>
+        <div class="suggested-users-list" id="suggestedUsersContainer">
+          <!-- Injected via JS -->
+        </div>
+      </div>
+
+      <div class="card sidebar-widget community-widget">
+        <h3>About Pulse</h3>
+        <p>A clean, lightweight social platform built with modern HTML, CSS, JavaScript, Express, and SQLite.</p>
+        <ul class="feature-bullets">
+          <li>✨ User Profiles & Bios</li>
+          <li>💬 Posts & Comments</li>
+          <li>❤️ Live Likes & Follow System</li>
+          <li>⚡ Instant Account Switcher</li>
+        </ul>
+      </div>
+    </aside>
+  </div>
+
+  <!-- Modal: Auth (Login & Register) -->
+  <div class="modal-overlay" id="authModal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 id="authModalTitle">Welcome Back</h3>
+        <button type="button" class="btn-close-modal" id="closeAuthModal">✕</button>
+      </div>
+
+      <div class="modal-body">
+        <div class="auth-tabs">
+          <button type="button" class="tab-btn active" id="tabLoginBtn">Sign In</button>
+          <button type="button" class="tab-btn" id="tabRegisterBtn">Create Account</button>
+        </div>
+
+        <!-- Login Form -->
+        <form id="loginForm" class="auth-form">
+          <div class="form-group">
+            <label for="loginUsername">Username or Email</label>
+            <input type="text" id="loginUsername" placeholder="e.g. alice or alice@example.com" required>
+          </div>
+          <div class="form-group">
+            <label for="loginPassword">Password</label>
+            <input type="password" id="loginPassword" placeholder="••••••••" required>
+          </div>
+          <div class="form-info-tip">Demo password for alice, bob, charlie is <code>password123</code></div>
+          <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+        </form>
+
+        <!-- Register Form -->
+        <form id="registerForm" class="auth-form" style="display: none;">
+          <div class="form-group">
+            <label for="regUsername">Username</label>
+            <input type="text" id="regUsername" placeholder="e.g. dev_sarah" required>
+          </div>
+          <div class="form-group">
+            <label for="regFullName">Full Name</label>
+            <input type="text" id="regFullName" placeholder="e.g. Sarah Connor" required>
+          </div>
+          <div class="form-group">
+            <label for="regEmail">Email Address</label>
+            <input type="email" id="regEmail" placeholder="sarah@example.com" required>
+          </div>
+          <div class="form-group">
+            <label for="regPassword">Password</label>
+            <input type="password" id="regPassword" placeholder="At least 6 characters" required>
+          </div>
+          <div class="form-group">
+            <label for="regBio">Bio (Optional)</label>
+            <input type="text" id="regBio" placeholder="Tell us about yourself">
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Edit Profile -->
+  <div class="modal-overlay" id="editProfileModal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>Edit Profile</h3>
+        <button type="button" class="btn-close-modal" id="closeEditProfileModal">✕</button>
+      </div>
+      <div class="modal-body">
+        <form id="editProfileForm">
+          <div class="form-group">
+            <label for="editFullName">Full Name</label>
+            <input type="text" id="editFullName" required>
+          </div>
+          <div class="form-group">
+            <label for="editBio">Bio</label>
+            <textarea id="editBio" rows="3" placeholder="Write something about yourself..."></textarea>
+          </div>
+          <div class="form-group">
+            <label for="editAvatarUrl">Avatar Image URL</label>
+            <input type="url" id="editAvatarUrl" placeholder="https://example.com/photo.jpg">
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">Save Changes</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Notification Toast -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
